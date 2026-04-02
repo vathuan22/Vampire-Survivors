@@ -1,10 +1,11 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance; // Create a singleton instance of the PlayerController. GK
+    public SpriteRenderer spriteRenderer;
     public void Awake()
     {
         instance = this; // Set the instance to this object. GK
@@ -33,23 +34,32 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Vector3 moveInput = new Vector3(0f, 0f, 0f); // Create a new vector to store the input. AK
-        moveInput.x = Input.GetAxisRaw("Horizontal"); // Get the horizontal input. AK
-        moveInput.y = Input.GetAxisRaw("Vertical"); // Get the vertical input. AK
+        Vector3 moveInput = new Vector3(0f, 0f, 0f);
+        moveInput.x = Input.GetAxisRaw("Horizontal");
+        moveInput.y = Input.GetAxisRaw("Vertical");
 
-        //Debug.Log(moveInput); AK
+        moveInput.Normalize();
 
-        moveInput.Normalize(); // Normalize the vector so that the player moves at the same speed in all directions. AK
+        transform.position += moveInput * moveSpeed * Time.deltaTime;
 
-        transform.position += moveInput * moveSpeed * Time.deltaTime; // Move the player in the direction of the input. AK
-
-        if(moveInput != Vector3.zero) // If the player is moving AK
+        // --- PHẦN SỬA ĐỂ QUAY TRÁI QUAY PHẢI ---
+        if (moveInput.x > 0) // Di chuyển sang phải
         {
-            anim.SetBool("isMoving", true); // Set the isMoving parameter in the animator to true. AK
+            spriteRenderer.flipX = false;
         }
-        else // If the player is not moving AK
+        else if (moveInput.x < 0) // Di chuyển sang trái
         {
-            anim.SetBool("isMoving", false); // Set the isMoving parameter in the animator to false. AK
+            spriteRenderer.flipX = true;
+        }
+        // ---------------------------------------
+
+        if (moveInput != Vector3.zero)
+        {
+            anim.SetBool("isMoving", true);
+        }
+        else
+        {
+            anim.SetBool("isMoving", false);
         }
     }
     public void AddWeapon(int weaponNumber) // Function to add a weapon. GK
