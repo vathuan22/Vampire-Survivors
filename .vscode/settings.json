@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Vampire-Survivors.sln"
+    "dotnet.defaultSolution": "Vampire-Survivors.sln",
+    "dotnet.preferCSharpExtension": true
 }

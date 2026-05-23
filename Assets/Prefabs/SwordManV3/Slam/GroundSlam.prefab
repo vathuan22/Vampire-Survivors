@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3134165762168680545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1061104304263332087}
+  - component: {fileID: 580232395980203944}
+  m_Layer: 0
+  m_Name: GroundSlam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1061104304263332087
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3134165762168680545}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &580232395980203944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3134165762168680545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b527baca246ce4fafe9a07d05efdc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+  - speed: 0
+    damage: 40
+    range: 2.5
+    timeBetweenAttacks: 3.5
+    amount: 1
+    duration: 0
+    upgradeText: GroundSlam 1
+  - speed: 0
+    damage: 60
+    range: 3
+    timeBetweenAttacks: 3
+    amount: 1
+    duration: 0
+    upgradeText: GroundSlam 2
+  - speed: 0
+    damage: 100
+    range: 4
+    timeBetweenAttacks: 2
+    amount: 1
+    duration: 0
+    upgradeText: GroundSlam 3
+  weaponLevel: 0
+  statsUpdated: 0
+  icon: {fileID: -1585232447, guid: 54c42f437fc91d64892271a10b1e54e9, type: 3}
+  ownerClass: {fileID: 0}
+  weaponPrefab: {fileID: 0}
+  maxSlamRadius: 5
+  expandSpeed: 10
+  slamDuration: 0.8
+  knockbackForce: 10
+  animationFrames:
+  - {fileID: -1717199801, guid: 54c42f437fc91d64892271a10b1e54e9, type: 3}
+  - {fileID: 375645455, guid: 54c42f437fc91d64892271a10b1e54e9, type: 3}
+  - {fileID: -632829114, guid: 54c42f437fc91d64892271a10b1e54e9, type: 3}
+  - {fileID: -922043451, guid: 54c42f437fc91d64892271a10b1e54e9, type: 3}
+  - {fileID: 1307018310, guid: 54c42f437fc91d64892271a10b1e54e9, type: 3}
+  - {fileID: -1585232447, guid: 54c42f437fc91d64892271a10b1e54e9, type: 3}
+  - {fileID: -1238818196, guid: 54c42f437fc91d64892271a10b1e54e9, type: 3}
+  - {fileID: -928997252, guid: 54c42f437fc91d64892271a10b1e54e9, type: 3}
+  frameDuration: 0.08
+  slamDamager: {fileID: -8275350867718698064, guid: 2f112e5083f6f5f4aa8518e303a7cc93, type: 3}
+  damageTickInterval: 0.1
+  damageRadiusMultiplier: 0.7
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 64

@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5707732063904152140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7147597603334762388}
+  - component: {fileID: -3168389523460096872}
+  m_Layer: 0
+  m_Name: SuperSlash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7147597603334762388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5707732063904152140}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3168389523460096872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5707732063904152140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa034d5a83d847449917a8d07e5b0be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+  - speed: 1
+    damage: 20
+    range: 2
+    timeBetweenAttacks: 7
+    amount: 1
+    duration: 0
+    upgradeText: Super Slash 1
+  - speed: 1
+    damage: 25
+    range: 2.5
+    timeBetweenAttacks: 6.5
+    amount: 1
+    duration: 0
+    upgradeText: Super Slash 2
+  - speed: 1
+    damage: 30
+    range: 3
+    timeBetweenAttacks: 6
+    amount: 1
+    duration: 0
+    upgradeText: Super Slash 3
+  weaponLevel: 0
+  statsUpdated: 0
+  icon: {fileID: 21300000, guid: 59b5114bfe62de241bcbda0db8596a9f, type: 3}
+  ownerClass: {fileID: 0}
+  weaponPrefab: {fileID: 0}
+  beamDamager: {fileID: 2893231383264877141, guid: 1f363164db9840a4088a9b82293cc046, type: 3}
+  beamRange: 15
+  beamWidth: 1.5
+  beamHeight: 3
+  beamDuration: 0.8
+  beamSpeed: 7
+  knockbackForce: 8
+  delayBetweenBeams: 0.1
+  animationFrames:
+  - {fileID: 21300000, guid: c067af2628718a443ae663f88f6ccc4a, type: 3}
+  - {fileID: 21300000, guid: d455af83dd66d7d419d6f9a48722beae, type: 3}
+  - {fileID: 21300000, guid: 1f4636cb549a38f41963bb14b584dd8b, type: 3}
+  - {fileID: 21300000, guid: 42da3c658558dd34e987d49616754389, type: 3}
+  - {fileID: 21300000, guid: c8a33f57302d7fd42a038b08bfa0a26e, type: 3}
+  - {fileID: 21300000, guid: 59b5114bfe62de241bcbda0db8596a9f, type: 3}
+  - {fileID: 21300000, guid: f324212d5aca4ef44b460513c97487b6, type: 3}
+  - {fileID: 21300000, guid: 83dcdf5b1b782e4499d8e250350cfdc8, type: 3}
+  - {fileID: 21300000, guid: 45da33d5db7fbeb4d9b2c9a7fb3f55e9, type: 3}
+  - {fileID: 21300000, guid: 0425141dd5a3bb84387db02944b84a9f, type: 3}
+  frameDuration: 0.5
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 64

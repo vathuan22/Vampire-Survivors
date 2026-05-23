@@ -25,6 +25,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        if (moveSpeed <= 0) return;
         if (PlayerController.instance.gameObject.activeSelf == true) // If the player is not active. GK
         {
             if (knockBackCounter > 0) // If the knock back counter is greater than 0. AK
@@ -67,37 +68,37 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damageToTake) // Function to take damage. AK
-    {
-        health -= damageToTake; // Decrease the health by the damage. AK
-
-        if (health <= 0) // If the health is less than or equal to 0. AK
+        public void TakeDamage(float damageToTake) // Function to take damage. AK
         {
-            Destroy(gameObject); // Destroy the enemy. AK
-            ExperienceLevelController.instance.SpawnExp(transform.position,
-                expToGive); // Set the experience when the enemy is destroyed. GK
-            if (Random.value <= coinDropRate) // If the random value is less than or equal to the coin drop rate. D
+            health -= damageToTake; // Decrease the health by the damage. AK
+
+            if (health <= 0) // If the health is less than or equal to 0. AK
             {
-                CoinController.instance.DropCoin(transform.position, coinValue); // Drop the coin. D
+                Destroy(gameObject); // Destroy the enemy. AK
+                ExperienceLevelController.instance.SpawnExp(transform.position,
+                    expToGive); // Set the experience when the enemy is destroyed. GK
+                if (Random.value <= coinDropRate) // If the random value is less than or equal to the coin drop rate. D
+                {
+                    CoinController.instance.DropCoin(transform.position, coinValue); // Drop the coin. D
+                }
+
+                SFXManager.instance.PlaySFXPitched(0); // Play the sound effect. D
+            }
+            else
+            {
+                SFXManager.instance.PlaySFXPitched(1); // Play the sound effect. D
             }
 
-            SFXManager.instance.PlaySFXPitched(0); // Play the sound effect. D
+            DamageNumberController.instance.SpawnDamage(damageToTake, transform.position); // Spawn the damage number. AK
         }
-        else
+
+        public void TakeDamage(float damageToTake, bool shouldKnockBack) // Function to take damage. AK
         {
-            SFXManager.instance.PlaySFXPitched(1); // Play the sound effect. D
+            TakeDamage(damageToTake); // Take damage. AK
+
+            if (shouldKnockBack == true) // If the enemy should be knocked back. AK
+            {
+                knockBackCounter = knockBackTime; // Set the knock back counter to the knock back time. AK
+            }
         }
-
-        DamageNumberController.instance.SpawnDamage(damageToTake, transform.position); // Spawn the damage number. AK
-    }
-
-    public void TakeDamage(float damageToTake, bool shouldKnockBack) // Function to take damage. AK
-    {
-        TakeDamage(damageToTake); // Take damage. AK
-
-        if (shouldKnockBack == true) // If the enemy should be knocked back. AK
-        {
-            knockBackCounter = knockBackTime; // Set the knock back counter to the knock back time. AK
-        }
-    }
 }

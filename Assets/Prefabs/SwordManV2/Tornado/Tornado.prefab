@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5707732063904152140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7147597603334762388}
+  - component: {fileID: -3168389523460096872}
+  m_Layer: 0
+  m_Name: Tornado
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7147597603334762388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5707732063904152140}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3168389523460096872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5707732063904152140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa034d5a83d847449917a8d07e5b0be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+  - speed: 1
+    damage: 30
+    range: 2
+    timeBetweenAttacks: 7
+    amount: 2
+    duration: 0
+    upgradeText: Tornado 1
+  - speed: 1
+    damage: 40
+    range: 2.5
+    timeBetweenAttacks: 6.5
+    amount: 4
+    duration: 0
+    upgradeText: Tornado 2
+  - speed: 1
+    damage: 50
+    range: 3
+    timeBetweenAttacks: 6
+    amount: 5
+    duration: 0
+    upgradeText: Tornado 3
+  weaponLevel: 0
+  statsUpdated: 0
+  icon: {fileID: 33064786, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  ownerClass: {fileID: 0}
+  weaponPrefab: {fileID: 0}
+  beamDamager: {fileID: 2893231383264877141, guid: 4c2f55923e8fa0d478cddc8106449aae, type: 3}
+  beamRange: 15
+  beamWidth: 1.5
+  beamHeight: 3
+  beamDuration: 0.8
+  beamSpeed: 5
+  knockbackForce: 8
+  delayBetweenBeams: 0.1
+  animationFrames:
+  - {fileID: -1213423318, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: 1284947433, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: -479688834, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: 1203338036, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: 893329323, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: -1597872101, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: -903231035, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: -1950898271, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: -431251154, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: 33064786, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: -426446909, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: -926636652, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: -382002244, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: 1710998313, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: 8227001, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: -1742738116, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: -2089150834, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: 685269332, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: 1926241815, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  - {fileID: -1804253785, guid: d6ee42e26d105e5499648b59403f98c4, type: 3}
+  frameDuration: 0.1
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 64

@@ -33,7 +33,7 @@ public class PlayerStatController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(UIController.instance.levelUpPanel.activeSelf) // If the level up panel is active. GK
+        if(UIController.instance != null && UIController.instance.levelUpPanel != null && UIController.instance.levelUpPanel.activeSelf)
         {
             UpdateDisplay();
         }
@@ -41,41 +41,47 @@ public class PlayerStatController : MonoBehaviour
 
     public void UpdateDisplay()
     {
+        if (UIController.instance == null) return;
+        
         if (moveSpeedLevel < moveSpeed.Count - 1) // If the move speed level is less than the count. GK
         {
-            UIController.instance.moveSpeedUpgradeDisplay.UpdateDisplay(moveSpeed[moveSpeedLevel + 1].cost, moveSpeed[moveSpeedLevel].value, moveSpeed[moveSpeedLevel+1].value); // Update the display of the move speed. GK
-
+            if (UIController.instance.moveSpeedUpgradeDisplay != null)
+                UIController.instance.moveSpeedUpgradeDisplay.UpdateDisplay(moveSpeed[moveSpeedLevel + 1].cost, moveSpeed[moveSpeedLevel].value, moveSpeed[moveSpeedLevel+1].value);
         }
         else
         {
-            UIController.instance.moveSpeedUpgradeDisplay.ShowMaxLevel(); // Show the max level. GK
+            if (UIController.instance.moveSpeedUpgradeDisplay != null)
+                UIController.instance.moveSpeedUpgradeDisplay.ShowMaxLevel();
         }
         if (healthLevel < health.Count - 1) // If the health level is less than the count. GK
         {
-            UIController.instance.healthUpgradeDisplay.UpdateDisplay(health[healthLevel + 1].cost, health[healthLevel].value, health[healthLevel+1].value); // Update the display of the move speed. GK
-
+            if (UIController.instance.healthUpgradeDisplay != null)
+                UIController.instance.healthUpgradeDisplay.UpdateDisplay(health[healthLevel + 1].cost, health[healthLevel].value, health[healthLevel+1].value);
         }
         else
         {
-            UIController.instance.healthUpgradeDisplay.ShowMaxLevel(); // Show the max level. GK
+            if (UIController.instance.healthUpgradeDisplay != null)
+                UIController.instance.healthUpgradeDisplay.ShowMaxLevel();
         }
         if (pickupRangeLevel < pickupRange.Count - 1) // If the pickup range level is less than the count. GK
         {
-            UIController.instance.pickupRangeUpgradeDisplay.UpdateDisplay(pickupRange[pickupRangeLevel + 1].cost, pickupRange[pickupRangeLevel].value, pickupRange[pickupRangeLevel+1].value); // Update the display of the move speed. GK
-
+            if (UIController.instance.pickupRangeUpgradeDisplay != null)
+                UIController.instance.pickupRangeUpgradeDisplay.UpdateDisplay(pickupRange[pickupRangeLevel + 1].cost, pickupRange[pickupRangeLevel].value, pickupRange[pickupRangeLevel+1].value);
         }
         else
         {
-            UIController.instance.pickupRangeUpgradeDisplay.ShowMaxLevel(); // Show the max level. GK
+            if (UIController.instance.pickupRangeUpgradeDisplay != null)
+                UIController.instance.pickupRangeUpgradeDisplay.ShowMaxLevel();
         }
         if (maxWeaponsLevel < maxWeapons.Count - 1) // If the max weapons level is less than the count. GK
         {
-            UIController.instance.maxWeaponsUpgradeDisplay.UpdateDisplay(maxWeapons[maxWeaponsLevel + 1].cost, maxWeapons[maxWeaponsLevel].value, maxWeapons[maxWeaponsLevel+1].value); // Update the display of the move speed. GK
-
+            if (UIController.instance.maxWeaponsUpgradeDisplay != null)
+                UIController.instance.maxWeaponsUpgradeDisplay.UpdateDisplay(maxWeapons[maxWeaponsLevel + 1].cost, maxWeapons[maxWeaponsLevel].value, maxWeapons[maxWeaponsLevel+1].value);
         }
         else
         {
-            UIController.instance.maxWeaponsUpgradeDisplay.ShowMaxLevel(); // Show the max level. GK
+            if (UIController.instance.maxWeaponsUpgradeDisplay != null)
+                UIController.instance.maxWeaponsUpgradeDisplay.ShowMaxLevel(); // Show the max level. GK
         }
     }
     public void PurchaseMoveSpeed() // Function to purchase the move speed. GK

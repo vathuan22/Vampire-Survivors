@@ -5,52 +5,135 @@ using System.Security.Cryptography.X509Certificates;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class SpinWeapon : Weapon // Inherits from the Weapon class. GK
+public class SpinWeapon : Weapon
 {
-    public float rotateSpeed; // The speed at which the weapon rotates. AK
-    public Transform holder, fireballToSpawn; // The holder of the weapon and the fireball to spawn. AK
-    public float timeBetweenSpawn; // The time between spawning fireballs. AK
-    private float spawnCounter; // The counter for the spawn time. AK
-    public EnemyDamager damager; // The enemy damager. GK
+    public float rotateSpeed;
+    public Transform holder, fireballToSpawn;
+    public float timeBetweenSpawn;
+    private float spawnCounter;
+    public EnemyDamager damager;
+    
+    public Transform fireballPrefab;  // ✅ Cache prefab để dùng lại
 
     void Start()
     {
-        SetStats(); // Set the stats. GK
-        UIController.instance.levelUpButtons[0].UpdateButtonDisplay(this); // Update the button display. GK
+        Debug.Log($"SpinWeapon Start: holder={holder}, fireballToSpawn={fireballToSpawn}");
         
+        if (fireballToSpawn != null)
+        {
+            fireballPrefab = fireballToSpawn;  
+            Debug.Log($"✅ SpinWeapon: fireballPrefab assigned from fireballToSpawn");
+        }
+        
+        else
+        {
+            // ✅ Nếu vẫn không tìm được, tìm trong transform hiện tại
+            if (transform.Find("Bullet") != null)
+            {
+                fireballPrefab = transform.Find("Bullet");
+                Debug.LogWarning($"⚠️ SpinWeapon: auto-found fireballPrefab at transform.Find('Bullet')");
+            }
+            else
+            {
+                Debug.LogError($"❌ SpinWeapon: Không tìm được fireballPrefab! holder={holder}, childCount={holder?.childCount ?? -1}");
+            }
+        }
+        SetStats();
     }
+
+    private void OnEnable()
+    {
+        // ✅ Luôn re-setup khi enable, không rely vào old reference
+        if (fireballToSpawn != null)
+        {
+            fireballPrefab = fireballToSpawn;
+            Debug.Log($"✅ OnEnable: fireballPrefab re-cached from fireballToSpawn");
+        }
+        else if (holder != null && holder.childCount > 0)
+        {
+            fireballPrefab = holder.GetChild(0);
+            Debug.Log($"⚠️ OnEnable: auto-found fireballPrefab from Holder");
+        }
+        else
+        {
+            Debug.LogError("❌ OnEnable: Không tìm được fireballPrefab!");
+        }
+        SetStats();
+        spawnCounter = 0f;
+    }
+    private void ClearExistingBullets()
+{
+    if (holder == null) return;
+
+    for (int i = holder.childCount - 1; i >= 0; i--)
+    {
+        Destroy(holder.GetChild(i).gameObject);
+    }
+}
 
     void Update()
     {
-       // holder.rotation = Quaternion.Euler(0f, 0f, holder.rotation.eulerAngles.z + (rotateSpeed * Time.deltaTime)); // Rotate the weapon around the z-axis. AK
-       holder.rotation = Quaternion.Euler(0f, 0f, holder.rotation.eulerAngles.z + (rotateSpeed * Time.deltaTime * stats[weaponLevel].speed)); // Rotate the weapon around the z-axis. GK
-        spawnCounter -= Time.deltaTime; // Decrease the spawn counter. AK
-        if(spawnCounter <= 0) // If the spawn counter is less than or equal to 0. AK
+        Debug.Log("SpinWeapon Update running");
+
+        if (holder == null)
         {
-            spawnCounter = timeBetweenSpawn; // Reset the spawn counter. AK
-
-            //Instantiate(fireballToSpawn, fireballToSpawn.position, fireballToSpawn.rotation, holder).gameObject.SetActive(true); // Spawn the fireball at the fireball's position and rotation as a child of the holder. AK
-
-            for (int i = 0; i < stats[weaponLevel].amount; i++) // For each fireball. GK
-            {
-                float rot = (360f / stats[weaponLevel].amount) * i; // Calculate the rotation. GK
-                Instantiate(fireballToSpawn, fireballToSpawn.position, Quaternion.Euler(0f, 0f, rot), holder).gameObject
-                    .SetActive(true); // Instantiate the fireball at the position and rotation. GK
-                SFXManager.instance.PlaySFX(8); // Play the sound effect. GK
-            }
+            Debug.LogError("❌ SpinWeapon: holder is NULL!");
+            return;
         }
-        if(statsUpdated) // If the stats are updated. GK
+
+        if (fireballPrefab == null)  // ✅ Dùng fireballPrefab
         {
-            SetStats(); // Set the stats. GK
-            statsUpdated = false; // Set the stats updated to false. GK
+            Debug.LogError("❌ SpinWeapon: fireballPrefab is NULL!");
+            return;
+        }
+
+        if (stats == null || stats.Count == 0)
+        {
+            Debug.LogError("❌ SpinWeapon: stats is NULL or empty!");
+            return;
+        }
+
+        holder.rotation = Quaternion.Euler(
+            0f, 0f, holder.rotation.eulerAngles.z + (rotateSpeed * Time.deltaTime * stats[weaponLevel].speed)
+        );
+
+        spawnCounter -= Time.deltaTime;
+        if (spawnCounter <= 0)
+        {
+            spawnCounter = timeBetweenSpawn;
+
+            float radius = stats[weaponLevel].range;
+
+            for (int i = 0; i < stats[weaponLevel].amount; i++)
+            {
+                float rot = (360f / stats[weaponLevel].amount) * i;
+
+                Transform bullet = Instantiate(fireballPrefab, holder);  // ✅ Dùng fireballPrefab
+                Vector3 offset = Quaternion.Euler(0, 0, rot) * Vector3.up * radius;
+
+                bullet.localPosition = offset;
+                bullet.localRotation = Quaternion.identity;
+                bullet.gameObject.SetActive(true);
+            }
+
+            if (SFXManager.instance != null)
+                SFXManager.instance.PlaySFX(8);
+        }
+
+        if (statsUpdated)
+        {
+            SetStats();
+            statsUpdated = false;
         }
     }
-    public void SetStats() // Function to set the stats of the weapon. GK
+
+    public void SetStats()
     {
-        damager.damageAmount = stats[weaponLevel].damage; // Set the damage amount of the damager to the damage of the weapon. GK       
-        transform.localScale= Vector3.one * stats[weaponLevel].range; // Set the scale of the weapon to the range of the weapon. GK
-        timeBetweenSpawn = stats[weaponLevel].timeBetweenAttacks; // Set the time between spawn to the time between attacks of the weapon. GK
-        damager.lifeTime = stats[weaponLevel].duration; // Set the life time of the damager to the duration of the weapon. GK
-        spawnCounter=0f; // Reset the spawn counter. GK
+        if (stats == null || stats.Count == 0) return;
+         ClearExistingBullets();
+        damager.damageAmount = stats[weaponLevel].damage;
+        timeBetweenSpawn = stats[weaponLevel].timeBetweenAttacks;
+        damager.lifeTime = stats[weaponLevel].duration;
+        spawnCounter = 0f;
     }
 }

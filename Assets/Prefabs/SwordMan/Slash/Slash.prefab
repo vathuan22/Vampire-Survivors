@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1706368676222858293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8457165650126486097}
+  - component: {fileID: -6141051294227448930}
+  m_Layer: 0
+  m_Name: Slash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8457165650126486097
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706368676222858293}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6141051294227448930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706368676222858293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4c899775bd04b342b47245f2aa2ed95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+  - speed: 0
+    damage: 12
+    range: 2
+    timeBetweenAttacks: 3
+    amount: 1
+    duration: 0
+    upgradeText: Slash 1
+  - speed: 0
+    damage: 18
+    range: 2.5
+    timeBetweenAttacks: 2.5
+    amount: 2
+    duration: 0
+    upgradeText: Slash 2
+  - speed: 0
+    damage: 20
+    range: 3
+    timeBetweenAttacks: 2
+    amount: 3
+    duration: 0
+    upgradeText: Slash 3
+  weaponLevel: 0
+  statsUpdated: 0
+  icon: {fileID: 21300000, guid: dcd4d6722877b6f4fbbddf0ce8f3640c, type: 3}
+  ownerClass: {fileID: 0}
+  weaponPrefab: {fileID: 0}
+  slashDamager: {fileID: -228723725171452278, guid: 1918979ea8e8155499c3056587999c51, type: 3}
+  slashRange: 9
+  slashRadius: 1.5
+  slashDuration: 1.5
+  slashDistance: 2.5
+  knockbackForce: 5
+  delayBetweenSlashes: 0.3
+  animationFrames:
+  - {fileID: 21300000, guid: 11fbc3bcd2981bf46ab1f1081c24f1e5, type: 3}
+  - {fileID: 21300000, guid: ad5eba19ffa1887498d96404d043a56e, type: 3}
+  - {fileID: 21300000, guid: dcd4d6722877b6f4fbbddf0ce8f3640c, type: 3}
+  - {fileID: 21300000, guid: 3916516664f7bf74ebb49a4a68472705, type: 3}
+  - {fileID: 21300000, guid: d5c690d0ce54aba43a9ab2e18e177533, type: 3}
+  - {fileID: 21300000, guid: e0ab370a3f6dcc846a73618f035fc373, type: 3}
+  - {fileID: 21300000, guid: c4c902d529bc83349bf1d2caee76974b, type: 3}
+  - {fileID: 21300000, guid: c26910727a2d0234cbad9e6abaa352bd, type: 3}
+  - {fileID: 21300000, guid: b4bfc20e3417a7f44af049ff7abf4a48, type: 3}
+  frameDuration: 0.2
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 64

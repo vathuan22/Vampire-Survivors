@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2870515620221211752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 797549504181256042}
+  - component: {fileID: 4577955545593633727}
+  m_Layer: 0
+  m_Name: HolylightSW
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &797549504181256042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2870515620221211752}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4577955545593633727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2870515620221211752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad1d9b13439a5774bbba6928cfbc1b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+  - speed: 0
+    damage: 60
+    range: 2
+    timeBetweenAttacks: 4
+    amount: 1
+    duration: 0
+    upgradeText: Holylight Sword 1
+  - speed: 0
+    damage: 100
+    range: 2.5
+    timeBetweenAttacks: 3.5
+    amount: 2
+    duration: 0
+    upgradeText: Holylight Sword 2
+  - speed: 0
+    damage: 150
+    range: 3
+    timeBetweenAttacks: 3
+    amount: 3
+    duration: 0
+    upgradeText: Holylight Sword 3
+  weaponLevel: 0
+  statsUpdated: 0
+  icon: {fileID: 1790303951, guid: 9a2ac9c76bfd42f47901f65d78904370, type: 3}
+  ownerClass: {fileID: 0}
+  weaponPrefab: {fileID: 0}
+  targetRange: 15
+  fallSpeed: 5
+  swordHeight: 6
+  explodeRadius: 4
+  knockbackForce: 12
+  delayBetweenSwords: 0.3
+  fallingFrames:
+  - {fileID: 404364780, guid: 9a2ac9c76bfd42f47901f65d78904370, type: 3}
+  - {fileID: 1073063358, guid: 9a2ac9c76bfd42f47901f65d78904370, type: 3}
+  - {fileID: 1790303951, guid: 9a2ac9c76bfd42f47901f65d78904370, type: 3}
+  - {fileID: 1578471017, guid: 9a2ac9c76bfd42f47901f65d78904370, type: 3}
+  - {fileID: 1872913974, guid: 9a2ac9c76bfd42f47901f65d78904370, type: 3}
+  - {fileID: -852124681, guid: 9a2ac9c76bfd42f47901f65d78904370, type: 3}
+  - {fileID: -2085697799, guid: 9a2ac9c76bfd42f47901f65d78904370, type: 3}
+  - {fileID: -1857771814, guid: 9a2ac9c76bfd42f47901f65d78904370, type: 3}
+  explosionFrames: []
+  frameDuration: 0.08
+  swordDamager: {fileID: -2368927930777075712, guid: 1718bb86b7a693a42801dd84c6273494, type: 3}
+  damageRadiusMultiplier: 0.8
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 64

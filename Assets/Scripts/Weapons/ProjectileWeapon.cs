@@ -1,55 +1,93 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileWeapon : Weapon
 {
-    public EnemyDamager damager; // The enemy damager. GK
+    public EnemyDamager damager;
+    public Projectile projectile;
+    private float shotCounter;
+    public float weaponRange;
+    public LayerMask whatIsEnemy;
+    public int sfxIndex = 4;  // Sound effect index (default: 4 - projectile launch)
 
-    public Projectile projectile; // The projectile. GK
-    private float shotCounter; // The counter for the shot. GK
-    public float weaponRange; // The range of the weapon. GK
-    public LayerMask whatIsEnemy; // The layer mask for the enemy. GK
-    // Start is called before the first frame update
     void Start()
     {
-        SetStats(); // Set the stats. GK
+        SetStats();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (statsUpdated == true) // If the stats are updated. GK
+        if (projectile == null)
         {
-            statsUpdated = false; // Set the stats updated to false. GK
-            SetStats(); // Set the stats. GK
+            Debug.LogWarning("ProjectileWeapon: projectile is NULL");
+            return;
         }
-        shotCounter -= Time.deltaTime; // Decrease the shot counter. GK
-        if (shotCounter <= 0) // If the shot counter is less than or equal to 0. GK
+
+        if (stats == null || stats.Count == 0)
         {
-            shotCounter = stats[weaponLevel].timeBetweenAttacks; // Reset the shot counter. GK
-            Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, weaponRange * stats[weaponLevel].range, whatIsEnemy); // Get all the enemies in the range. GK
-            if(enemies.Length > 0) // If there are enemies in the range. GK
+            Debug.LogWarning("ProjectileWeapon: stats is NULL or empty");
+            return;
+        }
+
+        shotCounter -= Time.deltaTime;
+        if (shotCounter > 0)
+        {
+            // Debug.Log($"Waiting: {shotCounter}");
+            return;
+        }
+
+        shotCounter = stats[weaponLevel].timeBetweenAttacks;
+
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(
+            transform.position,
+            weaponRange * stats[weaponLevel].range,
+            whatIsEnemy
+        );
+
+        
+
+        if (enemies.Length <= 0) return;
+
+        // ✅ Play sound effect when firing
+        if (SFXManager.instance != null)
+            SFXManager.instance.PlaySFXPitched(sfxIndex);
+
+        for (int i = 0; i < stats[weaponLevel].amount; i++)
+        {
+            Transform target = enemies[Random.Range(0, enemies.Length)].transform;
+            Vector3 direction = target.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+
+            Projectile newProjectile = Instantiate(
+                projectile,
+                transform.position,
+                Quaternion.Euler(0f, 0f, angle)
+            );
+
+            if (newProjectile != null)
             {
-                for (int i = 0; i < stats[weaponLevel].amount; i++) // For each enemy in the range. GK
-                {
-                   Vector3 targetPosition = enemies[Random.Range(0, enemies.Length)].transform.position; // Get the target position. GK
-                   Vector3 direction = targetPosition - transform.position; // Get the direction. GK
-                   float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Get the angle. GK
-                   angle -= 90; // Subtract 90 from the angle. GK
-                   projectile.transform.rotation = Quaternion.AngleAxis(angle,Vector3.forward); // Set the rotation of the projectile. GK
-                   Instantiate(projectile, projectile.transform.position, projectile.transform.rotation).gameObject.SetActive(true); // Instantiate the projectile at the position and rotation. GK
-                }
-                SFXManager.instance.PlaySFXPitched(6); // Play the sound effect. GK
+                newProjectile.gameObject.SetActive(true);
+                
             }
-         }
+        }
     }
-    void SetStats() // Function to set the stats of the weapon. GK
+
+    void SetStats()
+{
+    if (stats == null || stats.Count == 0) return;
+
+    if (weaponLevel < 0) weaponLevel = 0;
+    if (weaponLevel >= stats.Count) weaponLevel = stats.Count - 1;
+
+    if (damager != null)
     {
-        damager.damageAmount = stats[weaponLevel].damage; // Set the damage amount of the damager to the damage of the weapon. GK
-        damager.lifeTime = stats[weaponLevel].duration; // Set the life time of the damager to the duration of the weapon. GK
-        damager.transform.localScale = Vector3.one * stats[weaponLevel].range; // Set the scale of the damager to the range of the weapon. GK
-        shotCounter = 0f; // Reset the shot counter. GK
-        projectile.moveSpeed = stats[weaponLevel].speed; // Set the move speed of the projectile to the speed of the weapon. GK
+        damager.damageAmount = stats[weaponLevel].damage;
+        damager.lifeTime = stats[weaponLevel].duration;
+        damager.transform.localScale = Vector3.one;
     }
+
+    if (projectile != null)
+        projectile.moveSpeed = stats[weaponLevel].speed;
+
+    shotCounter = 0f;
+}
 }

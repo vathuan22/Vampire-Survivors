@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3433852762559700994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5486446389280863799}
+  - component: {fileID: 2633337515294476135}
+  - component: {fileID: 8541352347484148892}
+  - component: {fileID: 4809249434510981294}
+  m_Layer: 0
+  m_Name: ChainLightningWeapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5486446389280863799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3433852762559700994}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2633337515294476135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3433852762559700994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffa7a03fc307f014984bd7f9327dfe64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+  - speed: 3
+    damage: 20
+    range: 2
+    timeBetweenAttacks: 5
+    amount: 1
+    duration: 4
+    upgradeText: LighningBolt 1
+  - speed: 3
+    damage: 25
+    range: 2.5
+    timeBetweenAttacks: 4.5
+    amount: 2
+    duration: 4
+    upgradeText: LighningBolt 2
+  - speed: 3
+    damage: 30
+    range: 3
+    timeBetweenAttacks: 4
+    amount: 3
+    duration: 4
+    upgradeText: LighningBolt 3
+  weaponLevel: 0
+  statsUpdated: 0
+  icon: {fileID: 21300000, guid: b1e3c0d3fc8a21c47a2445f51dec142f, type: 3}
+  ownerClass: {fileID: 11400000, guid: e22e691beec546bfaee6466fa8f64827, type: 2}
+  weaponPrefab: {fileID: 0}
+  lightningBoltPrefab: {fileID: 3626534324117040986, guid: 272f730d54b2cc54f9a83b3936f5343e, type: 3}
+  damager: {fileID: 5517936375385658002, guid: 99606822ec44a184288c24d9de4def0e, type: 3}
+  weaponRange: 5
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 64
+  spawnHeightAbove: 20
+  maxChainCount: 2
+  chainRange: 2
+--- !u!58 &8541352347484148892
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3433852762559700994}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 15
+--- !u!114 &4809249434510981294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3433852762559700994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e8bc7ce961ce548b16138767064d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+  - speed: 1
+    damage: 20
+    range: 2
+    timeBetweenAttacks: 1
+    amount: 2
+    duration: 1
+    upgradeText: LighningBolt 1
+  - speed: 1.2
+    damage: 25
+    range: 2.5
+    timeBetweenAttacks: 0.8
+    amount: 3
+    duration: 1
+    upgradeText: LighningBolt 2
+  - speed: 1.4
+    damage: 30
+    range: 2.8
+    timeBetweenAttacks: 0.6
+    amount: 4
+    duration: 1
+    upgradeText: LighningBolt 3
+  weaponLevel: 0
+  statsUpdated: 0
+  icon: {fileID: 0}
+  ownerClass: {fileID: 11400000, guid: e22e691beec546bfaee6466fa8f64827, type: 2}
+  weaponPrefab: {fileID: 0}

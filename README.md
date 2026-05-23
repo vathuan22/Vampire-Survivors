@@ -1,9 +1,29 @@
 
-# Vampire Survivors
+# Class Survival
 
-![Vampire Survivors Logo](Assets/Image/MM.png)
+![Class Survival Logo](Assets/Image/MM.png)
 
-"Vampire Survivors" is a 2D survival arcade game built with Unity, where players must endure waves of supernatural enemies. In this action-packed game, players choose a character with unique abilities to survive against relentless hordes of vampires and other monstrous creatures.
+**Class Survival** is a 2D survival arcade game built with Unity, evolved from a Vampire Survivors-style foundation into a class-based progression system. Players start with a basic character and a **Dagger**, then build power by selecting Classes, unlocking class-specific weapons, and promoting classes into stronger forms.
+
+## Progression System
+
+### How it works
+
+- **Start**: Begin as a basic character with a **Dagger**.
+- **First Level Up**: Choose your first **Class** (Warrior, Mage, or Ranger).
+- **Subsequent Level Ups**: Select weapons belonging to your active class.
+- **Promotion**: When all weapons for a class are maxed, you can **Promote** the class into a stronger tier.
+- **Multi-Class**: There is a small chance (~15%) on each level-up to unlock a **2nd** or **3rd** class slot.
+- **Class Limit**: Maximum of **3 classes** per run.
+
+### Available Classes
+
+| Class   | Weapons | Promotion |
+|---------|---------|-----------|
+| Warrior | Blade weapons (2-3) | Blade Master |
+| Mage    | Magic spells (2-3) | Arch Mage |
+| Ranger  | Ranged attacks (2-3) | Sniper Master |
+tutututut
 
 ## Table of Contents
 
@@ -37,21 +57,40 @@ A step-by-step series of examples that tell you how to get a development environ
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/VampAK1864/vampire-survivors.git
+   git clone https://github.com/2312765-spec/Vampire-Survivors.git
    ```
 2. Open Unity Hub and add the cloned repository folder.
 3. Select the correct Unity version and open the project.
+4. Open the **Main** scene and press Play.
+
+## Setting Up Classes in the Editor
+
+After opening the project in Unity:
+
+1. Locate the **ClassManager** component in the scene (or add it to the GameManager object).
+2. In the Inspector, assign the **ClassData** assets from `Assets/Classes/` to the **All Classes** list:
+   - `Warrior.asset`
+   - `Mage.asset`
+   - `Ranger.asset`
+3. For each **ClassData** asset, assign the **class weapons** (Weapon components from the scene).
+4. Optionally assign **promotion class** references (e.g., Warrior → WarriorTier2).
 
 ## Playing the Game
 
 ### Controls
 
-- **Arrow Keys:** Move the character
+- **Arrow Keys / WASD:** Move the character
 - **Mouse:** Choose your upgrade at each level up.
+- **Escape:** Pause the game.
 
 ### Gameplay Overview
 
-Survive as long as possible by avoiding and defeating waves of enemies. Collect power-ups to enhance your character's abilities. Each game session lasts until your character's health depletes.
+Survive as long as possible by defeating waves of enemies. On each level-up, choose:
+- A **new class** (if you haven't chosen one yet, or by rare chance)
+- A **class weapon** upgrade or unlock
+- A **class promotion** (when all class weapons are maxed)
+
+Collect experience to level up, coins to purchase stat upgrades, and stay alive!
 
 ![Gameplay Screenshot](Assets/Image/Game.png)
 
@@ -63,9 +102,14 @@ The project follows this structure to ensure ease of navigation and development:
 
 - **Assets/**
   - **Animations/**: Contains all in-game animations.
-  - **Prefabs/**: Main enemy objects made.
+  - **Classes/**: ClassData ScriptableObject assets (Warrior, Mage, Ranger, etc.).
+  - **Prefabs/**: Main enemy and pickup objects.
   - **Scenes/**: Unity scenes including the main game and menus.
   - **Scripts/**: Game logic scripts.
+    - `ClassData.cs` — ScriptableObject defining a class (name, weapons, promotion).
+    - `ClassManager.cs` — Runtime manager for the player's class progression.
+    - `ExperienceLevelController.cs` — Level-up logic using the class system.
+    - `LevelUpSellectionButton.cs` — UI button supporting class/weapon/promotion choices.
 
 ![Feature Addition Flowchart](Assets/Image/EMM.png)
 
@@ -76,4 +120,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) f
 ## Contact
 
 - **Developers:** Antonis Kyriakou, George Constantinou and Dimitris Achilleos
-- **Project Link:** https://github.com/VampAK1864/vampire-survivors
+- **Project Link:** https://github.com/2312765-spec/Vampire-Survivors

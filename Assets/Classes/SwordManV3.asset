@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a010f93b2ff471c9703d5e7261cde2e, type: 3}
+  m_Name: SwordManV3
+  m_EditorClassIdentifier: 
+  className: 
+  classDescription: 
+  classIcon: {fileID: 0}
+  animatorController: {fileID: 0}
+  characterPrefab: {fileID: 160603543031662021, guid: 81c9474850b41b141a601f7a11b9bc8f, type: 3}
+  overlayPrefab: {fileID: 0}
+  starterWeapon: {fileID: 555008510758456477, guid: 66e66056eca3114429e927bde5568ef7, type: 3}
+  classWeapons:
+  - {fileID: 555008510758456477, guid: 66e66056eca3114429e927bde5568ef7, type: 3}
+  - {fileID: 3134165762168680545, guid: 9cbe416c449efee488357128d24f9c75, type: 3}
+  - {fileID: 2870515620221211752, guid: 87a5b45d81e2eea458a581194bb90b5f, type: 3}
+  promotionClass: {fileID: 0}
+  promotionDescription: 
+  secondClassUnlockChance: 0.098

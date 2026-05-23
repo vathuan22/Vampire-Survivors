@@ -1,34 +1,67 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public List<WeaponStats> stats; // The stats of the weapon. GK
-    public int weaponLevel; // The level of the weapon. GK
-    
+    public List<WeaponStats> stats;
+    public int weaponLevel;
+
     [HideInInspector]
-    public bool statsUpdated; // If the stats are updated. GK
-    public Sprite   icon; // The icon of the weapon. GK
-    public void LevelUp() // Function to level up the weapon. GK
+    public bool statsUpdated;
+
+    public Sprite icon;
+
+    [Tooltip("The class this weapon belongs to (used by the Class Survival progression system).")]
+    public ClassData ownerClass;
+
+    [HideInInspector]
+    public GameObject weaponPrefab;  // Track prefab này được spawn từ đâu
+
+    public bool IsMaxLevel()
     {
-        if(weaponLevel < stats.Count - 1) // If the weapon level is less than the stats count. GK
+        return stats != null && stats.Count > 0 && weaponLevel >= stats.Count - 1;
+    }
+
+    public void LevelUp()
+    {
+        if (stats == null || stats.Count == 0) return;
+
+        if (weaponLevel < stats.Count - 1)
         {
-            weaponLevel++; // Increase the weapon level. GK
-            statsUpdated= true; // Set the stats updated to true. GK
-            if (weaponLevel >= stats.Count -1 ) // If the weapon level is greater than or equal to the stats count. GK
+            weaponLevel++;
+            statsUpdated = true;
+
+            if (IsMaxLevel())
             {
-                PlayerController.instance.fullyLevelledWeapons.Add(this); // Add the weapon to the fully levelled weapons. GK
-                PlayerController.instance.assignedWeapons.Remove(this); // Remove the weapon from the assigned weapons. GK
+                if (PlayerController.instance != null)
+                {
+                    if (!PlayerController.instance.fullyLevelledWeapons.Contains(this))
+                        PlayerController.instance.fullyLevelledWeapons.Add(this);
+
+                    PlayerController.instance.assignedWeapons.Remove(this);
+                }
             }
         }
     }
-    
+
+    // ✅ Stop tất cả active coroutines của weapon này (dùng khi promote/disable)
+    public void StopActiveSkill()
+    {
+        StopAllCoroutines();
+        
+        // ✅ Destroy tất cả temporary effects (children objects)
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(transform.GetChild(i).gameObject);
+        }
+        
+        Debug.Log($"✅ Stopped all coroutines and effects for weapon: {gameObject.name}");
+    }
 }
 
 [System.Serializable]
-public class WeaponStats // The stats of the weapon. GK 
+public class WeaponStats
 {
-    public float speed, damage, range, timeBetweenAttacks, amount, duration; // The speed, damage, range, time between attacks, amount, and duration of the weapon. GK
-    public string upgradeText; // The upgrade text of the weapon. GK
+    public float speed, damage, range, timeBetweenAttacks, amount, duration;
+    public string upgradeText;
 }

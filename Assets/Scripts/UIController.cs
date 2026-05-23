@@ -7,128 +7,168 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
-    public static UIController instance; // Create a singleton instance of the UIController. GK
+    public static UIController instance;
 
     public void Awake()
     {
-        instance = this; // Set the instance to this object. GK
+        instance = this;
     }
 
-    public Slider explvlSlider; // The experience level slider. GK
-    public TMP_Text explvlText; // The experience level text. GK
+    public Slider explvlSlider;
+    public TMP_Text explvlText;
 
-    public LevelUpSellectionButton[] levelUpButtons; // The level up buttons. GK
+    public LevelUpSellectionButton[] levelUpButtons;
 
-    public GameObject levelUpPanel; // The level up panel. GK
-    public TMP_Text coinText; // The coin text. D
-    public GameObject levelEndScreen; // The level end script. GK
-    public TMP_Text endTimeText; // The end time text. GK
+    public GameObject levelUpPanel;
+    [Tooltip("Optional: Title text shown inside the level-up panel (e.g. 'Choose Your Path').")]
+    public TMP_Text levelUpPanelTitleText;
+
+    [Header("Promotion Panel")]
+    public GameObject promotionPanel;
+    public LevelUpSellectionButton[] promotionButtons;
+    [Tooltip("Optional: Title text shown inside the promotion panel.")]
+    public TMP_Text promotionPanelTitleText;
+
+    public TMP_Text coinText;
+    public GameObject levelEndScreen;
+    public TMP_Text endTimeText;
 
     public PlayerStatUpgradeDisplay moveSpeedUpgradeDisplay,
         healthUpgradeDisplay,
         pickupRangeUpgradeDisplay,
-        maxWeaponsUpgradeDisplay; // The player stat upgrade display. GK
+        maxWeaponsUpgradeDisplay;
 
-    public TMP_Text timeText; // The time text. GK
-    public string mainMenuName; // The main menu scene. GK
+    public TMP_Text timeText;
+    public string mainMenuName;
+    public GameObject pauseScreen;
 
-    public GameObject pauseScreen; // The pause screen. GK
+    [Tooltip("Optional HUD label displaying the player's active class.")]
+    public TMP_Text activeClassText;
 
-    // Start is called before the first frame update
     void Start()
     {
+        UpdateActiveClassDisplay();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) // If the escape key is pressed. GK
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PauseUnpause(); // Pause and unpause the game. GK
+            PauseUnpause();
         }
     }
 
-    public void UpdateExperience(int currentExp, int levelExp, int currentLvl) // Function to update the experience. GK
+    public void UpdateExperience(int currentExp, int levelExp, int currentLvl)
     {
-        explvlSlider.maxValue = levelExp; // Set the max value of the slider to the level experience. GK
-        explvlSlider.value = currentExp; // Set the value of the slider to the current experience. GK
-        explvlText.text = "Level: " + currentLvl; // Set the text to the current level and experience. GK
+        if (explvlSlider != null)
+        {
+            explvlSlider.maxValue = levelExp;
+            explvlSlider.value = currentExp;
+        }
+
+        if (explvlText != null)
+            explvlText.text = "Level: " + currentLvl;
     }
 
-    public void SkipLevelUp() // Function to skip the level. GK
+    public void SetLevelUpPanelTitle(string title)
     {
-        levelUpPanel.SetActive(false); // Set the level up panel to false. GK
-        Time.timeScale = 1f; // Set the timescale to 1. GK
+        if (levelUpPanelTitleText != null)
+            levelUpPanelTitleText.text = title;
     }
 
-    public void UpdateCoins() // Function to update the coins. D
+    public void SetPromotionPanelTitle(string title)
     {
-        coinText.text = "Coins: " + CoinController.instance.currentCoins; // Set the coin text to the current coins. D
+        if (promotionPanelTitleText != null)
+            promotionPanelTitleText.text = title;
     }
 
-    public void PurchaseMoveSpeed() // Function to purchase the move speed. GK
+    public void UpdateActiveClassDisplay()
+    {
+        if (activeClassText == null) return;
+        if (ClassManager.instance == null) return;
+
+        var active = ClassManager.instance.ActiveClass;
+        activeClassText.text = active != null ? "Class: " + active.className : "Class: None";
+    }
+
+    public void SkipLevelUp()
+    {
+        if (levelUpPanel != null)
+            levelUpPanel.SetActive(false);
+
+        Time.timeScale = 1f;
+    }
+
+    public void UpdateCoins()
+    {
+        if (coinText != null && CoinController.instance != null)
+            coinText.text = "Coins: " + CoinController.instance.currentCoins;
+    }
+
+    public void PurchaseMoveSpeed()
     {
         PlayerStatController.instance.PurchaseMoveSpeed();
         SkipLevelUp();
     }
 
-    public void PurchaseHealth() // Function to purchase the health. GK
+    public void PurchaseHealth()
     {
         PlayerStatController.instance.PurchaseHealth();
         SkipLevelUp();
     }
 
-    public void PurchasePickupRange() // Function to purchase the pickup range. GK
+    public void PurchasePickupRange()
     {
         PlayerStatController.instance.PurchasePickupRange();
         SkipLevelUp();
     }
 
-    public void PurchaseMaxWeapons() // Function to purchase the max weapons. GK
+    public void PurchaseMaxWeapons()
     {
         PlayerStatController.instance.PurchaseMaxWeapons();
         SkipLevelUp();
     }
 
-    public void UpdateTimer(float time) // Function to update the timer. GK
+    public void UpdateTimer(float time)
     {
-        float minutes = Mathf.FloorToInt(time / 60); // Set the minutes to the time divided by 60. GK
-        float seconds = Mathf.FloorToInt(time % 60); // Set the seconds to the time modulo 60. GK
-        timeText.text =
-            "Time: " + minutes + ":" + seconds.ToString("00"); // Set the time text to the minutes and seconds. GK
+        float minutes = Mathf.FloorToInt(time / 60);
+        float seconds = Mathf.FloorToInt(time % 60);
+        if (timeText != null)
+            timeText.text = "Time: " + minutes + ":" + seconds.ToString("00");
     }
 
-    public void GoToMainMenu() // Function to go to the main menu. GK
+    public void GoToMainMenu()
     {
-        SceneManager.LoadScene(mainMenuName); // Load the main menu. GK
-        Time.timeScale = 1f; // Set the time scale to 1. GK 
+        SceneManager.LoadScene(mainMenuName);
+        Time.timeScale = 1f;
     }
 
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Time.timeScale = 1f; // Set the time scale to 1. GK 
+        Time.timeScale = 1f;
     }
 
-    public void QuitGame() // Function to quit the game. GK
+    public void QuitGame()
     {
-        Application.Quit(); // Quit the application. GK
+        Application.Quit();
     }
 
-    public void PauseUnpause() // Function to pause and unpause the game. GK
+    public void PauseUnpause()
     {
-        if (pauseScreen.activeSelf == false) // If the pause screen is active. GK
+        if (pauseScreen == null) return;
+
+        if (pauseScreen.activeSelf == false)
         {
-            pauseScreen.SetActive(true); // Set the pause screen to the opposite of itself. GK
-            Time.timeScale = 0f; // Set the time scale to 0. GK
+            pauseScreen.SetActive(true);
+            Time.timeScale = 0f;
         }
         else
         {
-            pauseScreen.SetActive(false); // Set the pause screen to the opposite of itself. GK
-            if (levelUpPanel.activeSelf == false) // If the level up panel is not active. GK
+            pauseScreen.SetActive(false);
+            if (levelUpPanel == null || levelUpPanel.activeSelf == false)
             {
-                Time.timeScale = 1f; // Set the time scale to 1. GK 
-
+                Time.timeScale = 1f;
             }
         }
     }

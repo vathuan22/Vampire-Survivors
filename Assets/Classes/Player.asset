@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a010f93b2ff471c9703d5e7261cde2e, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  className: Starter
+  classDescription: 
+  classIcon: {fileID: 0}
+  characterPrefab: {fileID: 6088303638114786505, guid: c3cc689417794324183ada862feae99a, type: 3}
+  starterWeapon: {fileID: 1417731153642498730, guid: 12bf190b2db94714dbef1aadbed04df5, type: 3}
+  classWeapons:
+  - {fileID: 1417731153642498730, guid: 12bf190b2db94714dbef1aadbed04df5, type: 3}
+  promotionClass: {fileID: 0}
+  promotionDescription: 
+  secondClassUnlockChance: 0.15
